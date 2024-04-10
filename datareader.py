@@ -120,7 +120,7 @@ class YcbineoatReader:
     return mask
 
   def get_depth(self,i):
-    depth = cv2.imread(self.color_files[i].replace('rgb','depth'),-1)/1e3
+    depth = cv2.imread(self.color_files[i].replace('rgb','depth'),-1)/4000
     depth = cv2.resize(depth, (self.W,self.H), interpolation=cv2.INTER_NEAREST)
     depth[(depth<0.1) | (depth>=self.zfar)] = 0
     return depth

@@ -38,8 +38,8 @@ class MouseCallback:
 if __name__=='__main__':
   parser = argparse.ArgumentParser()
   code_dir = os.path.dirname(os.path.realpath(__file__))
-  parser.add_argument('--mesh_file', type=str, default=f'{code_dir}/demo_data/lol/mesh/LOL.obj')
-  parser.add_argument('--test_scene_dir', type=str, default=f'{code_dir}/demo_data/lol')
+  parser.add_argument('--mesh_file', type=str, default=f'{code_dir}/demo_data/battery/mesh/2.obj')
+  parser.add_argument('--test_scene_dir', type=str, default=f'{code_dir}/demo_data/battery')
   parser.add_argument('--est_refine_iter', type=int, default=10)
   parser.add_argument('--track_refine_iter', type=int, default=2)
   parser.add_argument('--debug', type=int, default=1)
@@ -94,9 +94,7 @@ if __name__=='__main__':
           box=input_box[None, :],
           multimask_output=False,
       )
-      mask = masks[0]*255/4000
-      cv2.imshow('mask', mask)
-      cv2.waitKey(0)
+      mask = masks[0]*255
       pose = est.register(K=reader.K, rgb=color, depth=depth, ob_mask=mask, iteration=args.est_refine_iter)
 
       if debug>=3:
